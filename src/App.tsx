@@ -1,12 +1,24 @@
+import { useEffect, useState } from 'react'
 import { FilterPanel, Grid, PageHeader, UserCard } from './components'
+import { getAllUsers } from './apis'
+import { User } from './types/user.type'
 import './styles/main.css'
 
 function App() {
-  const handleOnReset = () => {}
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    getAllUsers().then((data) => setUsers(data))
+  }, [])
+
+  const handleOnReset = () => {
+    // eslint-disable-next-line
+    console.log('onReset...')
+  }
 
   const handleOnSearch = (val: string) => {
     // eslint-disable-next-line
-    console.log(val)
+    console.log('onSearch', val)
   }
 
   return (
@@ -14,36 +26,23 @@ function App() {
       <PageHeader title='Team Users' />
       <FilterPanel onReset={handleOnReset} onSearch={handleOnSearch} />
       <Grid>
-        <UserCard
-          company='Daimler South East Asia'
-          email='benson.toh@daimler.com'
-          name='Toh Ban Soon Toh Ban Soon Toh Ban Soon'
-          phone='+6590449045'
-        />
-        <UserCard
-          company='Daimler South East Asia'
-          email='benson.toh@daimler.com'
-          name='Benson Toh'
-          phone='+6590449045'
-        />
-        <UserCard
-          company='Daimler South East Asia'
-          email='benson@daimler.com'
-          name='Benson Toh Ban Soon'
-          phone='+6590449045'
-        />
-        <UserCard
-          company='Daimler South East Asia Daimler South East Asia Daimler South East Asia'
-          email='benson.toh@daimler.com'
-          name='Benson Toh'
-          phone='+6590449045'
-        />
-        <UserCard
-          company='Daimler South East Asia'
-          email='benson.toh@daimler.com'
-          name='Benson Toh'
-          phone='+6590449045'
-        />
+        {users.map((user: User) => {
+          const {
+            name,
+            email,
+            phone,
+            company: { name: companyName },
+          } = user
+          return (
+            <UserCard
+              key={user.id}
+              name={name}
+              email={email}
+              company={companyName}
+              phone={phone}
+            />
+          )
+        })}
       </Grid>
     </>
   )

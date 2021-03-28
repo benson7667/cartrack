@@ -27,6 +27,7 @@
 }
 
 .filter-panel__actions-btn {
+    cursor: pointer;
     margin: 0 4px;
     outline: none;
     border: none;

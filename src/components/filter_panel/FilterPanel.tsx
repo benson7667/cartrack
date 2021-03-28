@@ -13,26 +13,49 @@ const FilterPanel = (props: Props) => {
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setQuery(e.target.value)
-  const handleOnSearch = () => onSearch(query)
-  const handleOnReset = () => onReset()
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    onSearch(query)
+  }
+
+  const handleOnSearch = () => {
+    onSearch(query)
+  }
+
+  const handleOnReset = () => {
+    setQuery('')
+    onReset()
+  }
 
   return (
     <div className='app-container'>
       <div className='filter-panel__container'>
-        <h3 className='filter-panel__title'>Search Panel</h3>
-        <div className='filter-panel__inputs'>
-          <Input name='query' onChange={handleOnChange} value={query} />
-        </div>
+        <form onSubmit={handleFormSubmit}>
+          <h3 className='filter-panel__title'>Search Panel</h3>
+          <div className='filter-panel__inputs'>
+            <Input
+              placeholder='Search by email or name'
+              name='query'
+              onChange={handleOnChange}
+              value={query}
+            />
+          </div>
 
-        <div className='filter-panel__actions'>
-          {/* TODO: break 'button' to separate component */}
-          <button onClick={handleOnSearch} className='filter-panel__actions-btn search'>
-            Search
-          </button>
-          <button onClick={handleOnReset} className='filter-panel__actions-btn reset'>
-            Reset
-          </button>
-        </div>
+          <div className='filter-panel__actions'>
+            {/* TODO: break 'button' to separate component */}
+            <button
+              type='submit'
+              onClick={handleOnSearch}
+              className='filter-panel__actions-btn search'
+            >
+              Search
+            </button>
+            <button onClick={handleOnReset} className='filter-panel__actions-btn reset'>
+              Reset
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   )

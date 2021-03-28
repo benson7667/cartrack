@@ -5,13 +5,19 @@ interface Props {
   name: string
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  placeholder: string
 }
 
 const Input = (props: Props) => {
-  const { value, onChange } = props
+  const { value, onChange, placeholder = '' } = props
   return (
     <>
-      <input className='app__input' onChange={onChange} value={value} />
+      <input
+        className='app__input'
+        onChange={onChange}
+        value={value}
+        placeholder={placeholder}
+      />
     </>
   )
 }
