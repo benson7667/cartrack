@@ -1,9 +1,10 @@
-import './app.css'
+import { PageHeader } from './components'
+import './styles/main.css'
 
 function App() {
   return (
     <>
-      <div>Hello World!!!</div>
+      <PageHeader title='Team Users' />
     </>
   )
 }
