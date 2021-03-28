@@ -1,3 +1,5 @@
 export { PageHeader } from './page_header'
 export { UserCard } from './user_card'
 export { Grid } from './grid'
+export { FilterPanel } from './filter_panel'
+export { Input } from './input'

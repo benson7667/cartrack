@@ -4,7 +4,10 @@
     --color-bg-secondary: #ffffff;
     --color-border-primary: #f0f0f0;
     --color-border-secondary: #ececec;
+    --color-border-dark: #bbb;
 
+    --color-bg-dark: #222;
+    --color-bg-light: #ffffff;
 
     /* fonts */
     --color-text-primary: #222;

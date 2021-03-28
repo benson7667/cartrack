@@ -1,10 +1,18 @@
-import { Grid, PageHeader, UserCard } from './components'
+import { FilterPanel, Grid, PageHeader, UserCard } from './components'
 import './styles/main.css'
 
 function App() {
+  const handleOnReset = () => {}
+
+  const handleOnSearch = (val: string) => {
+    // eslint-disable-next-line
+    console.log(val)
+  }
+
   return (
     <>
       <PageHeader title='Team Users' />
+      <FilterPanel onReset={handleOnReset} onSearch={handleOnSearch} />
       <Grid>
         <UserCard
           company='Daimler South East Asia'

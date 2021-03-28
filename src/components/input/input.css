@@ -1,0 +1,14 @@
+@import '../../styles/variables.css';
+
+.app__input {
+    padding: 10px;
+    border: 2px solid var(--color-border-dark);
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.app__input:focus {
+    border: 2px solid var(--color-bg-dark);
+}
