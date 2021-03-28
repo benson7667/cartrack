@@ -4,7 +4,7 @@
         "es6": true,
         "node": true
     },
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "plugins": [
         "react"
     ],

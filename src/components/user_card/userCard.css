@@ -1,0 +1,72 @@
+@import '../../styles/variables.css';
+
+.usercard__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 30px 35px;
+    background-color: var(--color-bg-secondary);
+    box-shadow: var(--shadow-card);
+}
+
+.usercard__username {
+    margin-bottom: 8px;
+}
+
+.usercard__info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.usercard__info-left {
+    margin-right: 10px;
+}
+
+.usercard__info-row {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.usercard__info-row .icon{
+    margin-right: 10px;
+    padding-top: 3px;
+}
+
+.usercard__info-right {
+    display: flex;
+    align-items: flex-end;
+}
+
+.usercard__contact-btn {
+    cursor: pointer;
+    border: 1px solid var(--color-border-secondary);
+    outline: none;
+    background-color: var(--color-bg-secondary);
+    padding: 10px 14px;
+    border-radius: 4px;
+    min-width: 140px;
+}
+
+.usercard__contact-btn:hover {
+    background-color: var(--color-bg-primary);
+}
+
+
+@media screen and (max-width: 600px) {
+    .usercard__container{
+        padding: 20px 20px 25px;
+        font-size: 14px;
+    }
+
+    .usercard__info {
+        display: block;
+    }
+
+    .usercard__contact-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+}

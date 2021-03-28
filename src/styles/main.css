@@ -9,6 +9,7 @@ html, body {
     padding: 0;
     background-color: var(--color-bg-primary);
     font-family: 'Open Sans', sans-serif;
+    color: var(--color-text-primary);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,7 +26,13 @@ p,span {
 }
 
 .app-container {
-    max-width: 1024px;
+    max-width: 1280px;
     padding: 0 20px;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 1280px) {
+    .app-container {
+        max-width: 1000px;
+    }
 }
