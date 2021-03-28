@@ -20,7 +20,9 @@ const FilterPanel = (props: Props) => {
   }
 
   const handleOnSearch = () => {
-    onSearch(query)
+    if (query.trim() !== '') {
+      onSearch(query)
+    }
   }
 
   const handleOnReset = () => {
@@ -41,21 +43,19 @@ const FilterPanel = (props: Props) => {
               value={query}
             />
           </div>
-
-          <div className='filter-panel__actions'>
-            {/* TODO: break 'button' to separate component */}
-            <button
-              type='submit'
-              onClick={handleOnSearch}
-              className='filter-panel__actions-btn search'
-            >
-              Search
-            </button>
-            <button onClick={handleOnReset} className='filter-panel__actions-btn reset'>
-              Reset
-            </button>
-          </div>
         </form>
+        <div className='filter-panel__actions'>
+          <button
+            type='submit'
+            onClick={handleOnSearch}
+            className='filter-panel__actions-btn search'
+          >
+            Search
+          </button>
+          <button onClick={handleOnReset} className='filter-panel__actions-btn reset'>
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   )

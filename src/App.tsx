@@ -6,44 +6,86 @@ import './styles/main.css'
 
 function App() {
   const [users, setUsers] = useState([])
+  const [isLoading, setIsLoadingUser] = useState(false)
+  const [defaultList, setDefaultList] = useState([])
 
   useEffect(() => {
-    getAllUsers().then((data) => setUsers(data))
+    getResult()
   }, [])
 
+  const getResult = () => {
+    setIsLoadingUser(true)
+    getAllUsers()
+      .then((data) => {
+        setUsers(data)
+        setDefaultList(data) // make a original copy to defaultList
+      })
+      .finally(() => {
+        setIsLoadingUser(false)
+      })
+  }
+
   const handleOnReset = () => {
-    // eslint-disable-next-line
-    console.log('onReset...')
+    setUsers(defaultList)
+  }
+
+  // remove whitespace and convert to lowerCase
+  const processString = (str: string) => {
+    const noWhiteSpaceStr = str.replace(/\s+/g, '')
+    const lowerCaseStr = noWhiteSpaceStr.toLowerCase()
+    return lowerCaseStr
   }
 
   const handleOnSearch = (val: string) => {
-    // eslint-disable-next-line
-    console.log('onSearch', val)
+    // take defaultList and do the filters
+    const processedQueryStr = processString(val)
+
+    const searchResults = defaultList.filter((item: User) => {
+      const processedNameStr = processString(item.name)
+      if (processedNameStr.includes(processedQueryStr)) return true
+
+      const processedEmailStr = processString(item.email)
+      if (processedEmailStr.includes(processedQueryStr)) return true
+
+      return false
+    })
+
+    setUsers(searchResults)
+  }
+
+  const renderContent = () => {
+    if (isLoading) {
+      return <h1>Loading...</h1>
+    }
+
+    if (!isLoading && users && !users.length) {
+      return <h1>No Result Found</h1>
+    }
+
+    return users.map((user: User) => {
+      const {
+        name,
+        email,
+        phone,
+        company: { name: companyName },
+      } = user
+      return (
+        <UserCard
+          key={user.id}
+          name={name}
+          email={email}
+          company={companyName}
+          phone={phone}
+        />
+      )
+    })
   }
 
   return (
     <>
       <PageHeader title='Team Users' />
       <FilterPanel onReset={handleOnReset} onSearch={handleOnSearch} />
-      <Grid>
-        {users.map((user: User) => {
-          const {
-            name,
-            email,
-            phone,
-            company: { name: companyName },
-          } = user
-          return (
-            <UserCard
-              key={user.id}
-              name={name}
-              email={email}
-              company={companyName}
-              phone={phone}
-            />
-          )
-        })}
-      </Grid>
+      <Grid>{renderContent()}</Grid>
     </>
   )
 }
