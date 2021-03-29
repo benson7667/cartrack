@@ -11,7 +11,6 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const usersRef = useRef(users)
-  const activeIndexRef = useRef({})
 
   useEffect(() => {
     getResult()
@@ -39,7 +38,6 @@ function App() {
     setActiveIndex((prev) => {
       const maxCount = usersRef.current.length - 1
       const newValue = prev === maxCount ? prev : prev + 1
-      activeIndexRef.current = usersRef.current[newValue]
       return newValue
     })
   }
@@ -47,14 +45,8 @@ function App() {
   function decrement() {
     setActiveIndex((prev) => {
       const newValue = prev === 0 ? prev : prev - 1
-      activeIndexRef.current = usersRef.current[newValue]
       return newValue
     })
-  }
-
-  function sendEmailToTargetPerson() {
-    const user = activeIndexRef.current as any
-    alert(`Send email to: ${user.email}`)
   }
 
   function handleKeyDown(e: any) {
@@ -76,10 +68,6 @@ function App() {
 
       case 'ArrowRight':
         increment()
-        break
-
-      case 'Enter':
-        sendEmailToTargetPerson()
         break
 
       default:
@@ -116,7 +104,6 @@ function App() {
     usersRef.current = searchResults
 
     setActiveIndex(0)
-    activeIndexRef.current = 0
   }
 
   const renderContent = () => {
@@ -156,8 +143,8 @@ function App() {
         <p className='box-wrapper'>
           Hi, I am not sure how do you want the interface to be navigate via keyboard.{' '}
           <br></br>
-          However, you can move the active cursor by using keyboard arrow and press Enter
-          to send an email to the target person
+          However, you can move the active cursor by using keyboard arrow without much
+          meaning. LOL
         </p>
       </div>
 
