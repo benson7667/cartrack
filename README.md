@@ -1,5 +1,8 @@
 # Cartrack Assignment
 
+## Hosted URL
+https://gifted-poincare-bb51a4.netlify.app/
+
 ## Get Started
 The application should start at localhost:3000
 ```
