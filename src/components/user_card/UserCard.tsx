@@ -5,13 +5,19 @@ interface Props {
   email: string
   company: string
   phone: string
+  isTarget?: boolean
 }
 
 const UserCard = (props: Props) => {
-  const { name, email, company, phone } = props
+  const { name, email, company, phone, isTarget } = props
+
+  const getStyle = () => {
+    if (isTarget) return { border: '2px solid black' }
+    return {}
+  }
 
   return (
-    <div className='usercard__container'>
+    <div className='usercard__container' style={getStyle()}>
       <h2 className='usercard__username'>{name}</h2>
       <div className='usercard__info'>
         <div className='usercard__info-left'>
@@ -29,7 +35,9 @@ const UserCard = (props: Props) => {
           </div>
         </div>
         <div className='usercard__info-right'>
-          <button className='usercard__contact-btn'>Contact by Email</button>
+          <a href={`mailto:${email}`} className='usercard__contact-btn'>
+            Contact by Email
+          </a>
         </div>
       </div>
     </div>
